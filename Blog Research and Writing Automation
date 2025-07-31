@@ -1,0 +1,383 @@
+{
+  "name": "Blog Research and Writing Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 9 * * 1"
+            }
+          ]
+        }
+      },
+      "id": "f8b0c5e2-8b7a-4c5d-9e3f-2a1b8c9d0e4f",
+      "name": "Weekly Content Planning",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://trends.google.com/trends/api/explore",
+        "options": {
+          "headers": {
+            "User-Agent": "Mozilla/5.0 (compatible; n8n)"
+          }
+        }
+      },
+      "id": "a3b2c1d4-5e6f-7g8h-9i0j-1k2l3m4n5o6p",
+      "name": "Google Trends Research",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://www.reddit.com/r/{{ $json.topic }}/hot.json",
+        "options": {
+          "headers": {
+            "User-Agent": "n8n-blog-automation"
+          }
+        }
+      },
+      "id": "b4c3d2e1-6f7g-8h9i-0j1k-2l3m4n5o6p7q",
+      "name": "Reddit Content Research",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "completion",
+        "model": "gpt-4",
+        "messages": {
+          "messageValues": [
+            {
+              "role": "system",
+              "message": "You are a professional blog writer. Create engaging, SEO-optimized content based on the research provided."
+            },
+            {
+              "role": "user",
+              "message": "Write a comprehensive blog post about: {{ $json.topic }}\n\nBased on this research data: {{ $json.research_data }}\n\nTarget keywords: {{ $json.keywords }}\n\nWord count: 1500-2500 words\n\nInclude: Introduction, main sections with subheadings, conclusion, and call-to-action."
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7,
+          "maxTokens": 4000
+        }
+      },
+      "id": "c5d4e3f2-7g8h-9i0j-1k2l-3m4n5o6p7q8r",
+      "name": "AI Content Writer",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        900,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// SEO Optimization Function\nconst content = $input.first().json.content;\nconst targetKeyword = $input.first().json.target_keyword;\n\n// Extract title and meta description\nconst titleMatch = content.match(/^#\\s+(.+)$/m);\nconst title = titleMatch ? titleMatch[1] : 'Blog Post Title';\n\n// Generate meta description\nconst firstParagraph = content.split('\\n\\n')[1] || content.substring(0, 300);\nconst metaDescription = firstParagraph.replace(/[#*]/g, '').substring(0, 155) + '...';\n\n// Count keyword occurrences\nconst keywordCount = (content.toLowerCase().match(new RegExp(targetKeyword.toLowerCase(), 'g')) || []).length;\nconst totalWords = content.split(/\\s+/).length;\nconst keywordDensity = ((keywordCount / totalWords) * 100).toFixed(2);\n\n// SEO Score calculation\nlet seoScore = 0;\nif (title.toLowerCase().includes(targetKeyword.toLowerCase())) seoScore += 20;\nif (keywordDensity >= 1 && keywordDensity <= 3) seoScore += 20;\nif (totalWords >= 1500) seoScore += 15;\nif (content.includes('##')) seoScore += 15; // Has subheadings\nif (metaDescription.length >= 120 && metaDescription.length <= 155) seoScore += 15;\nif (content.includes('[') && content.includes('](')) seoScore += 15; // Has links\n\nreturn {\n  optimized_content: content,\n  title: title,\n  meta_description: metaDescription,\n  keyword_density: keywordDensity + '%',\n  word_count: totalWords,\n  seo_score: seoScore + '/100',\n  target_keyword: targetKeyword,\n  ready_for_publish: seoScore >= 70\n};"
+      },
+      "id": "d6e5f4g3-8h9i-0j1k-2l3m-4n5o6p7q8r9s",
+      "name": "SEO Optimizer",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/images/generations",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openAiApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"prompt\": \"Professional blog featured image for: {{ $json.title }}, modern, clean, high-quality\",\n  \"n\": 1,\n  \"size\": \"1024x1024\",\n  \"response_format\": \"url\"\n}",
+        "options": {
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        }
+      },
+      "id": "e7f6g5h4-9i0j-1k2l-3m4n-5o6p7q8r9s0t",
+      "name": "Generate Featured Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1340,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "resource": "post",
+        "title": "={{ $json.title }}",
+        "contentFormat": "html",
+        "content": "={{ $json.optimized_content }}",
+        "status": "draft",
+        "additionalFields": {
+          "excerpt": "={{ $json.meta_description }}",
+          "featuredMediaId": "={{ $json.featured_image_id }}"
+        }
+      },
+      "id": "f8g7h6i5-0j1k-2l3m-4n5o-6p7q8r9s0t1u",
+      "name": "WordPress Publisher",
+      "type": "n8n-nodes-base.wordpress",
+      "typeVersion": 1,
+      "position": [
+        1560,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "text": "New blog post published! 🚀\\n\\n{{ $json.title }}\\n\\nRead more: {{ $json.post_url }}\\n\\n#ContentMarketing #BlogAutomation #n8n",
+        "additionalFields": {}
+      },
+      "id": "g9h8i7j6-1k2l-3m4n-5o6p-7q8r9s0t1u2v",
+      "name": "Twitter Share",
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 2,
+      "position": [
+        1780,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "text": "{{ $json.title }}\\n\\n{{ $json.meta_description }}\\n\\nRead the full article: {{ $json.post_url }}\\n\\n#ContentStrategy #DigitalMarketing",
+        "additionalFields": {
+          "visibility": "PUBLIC"
+        }
+      },
+      "id": "h0i9j8k7-2l3m-4n5o-6p7q-8r9s0t1u2v3w",
+      "name": "LinkedIn Share",
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "subject": "Weekly Blog Report - {{ $today.format('MMM Do, YYYY') }}",
+        "message": "Hi there!\\n\\nHere's your weekly blog automation report:\\n\\n📝 New Post Published: {{ $json.title }}\\n🔗 URL: {{ $json.post_url }}\\n📊 SEO Score: {{ $json.seo_score }}\\n📈 Word Count: {{ $json.word_count }}\\n🎯 Keyword Density: {{ $json.keyword_density }}\\n\\nThe post is now live and has been shared on social media.\\n\\nBest regards,\\nYour Blog Automation Bot",
+        "fromEmail": "automation@yourdomain.com",
+        "toEmail": "your-email@domain.com",
+        "options": {}
+      },
+      "id": "i1j0k9l8-3m4n-5o6p-7q8r-9s0t1u2v3w4x",
+      "name": "Email Notification",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        2000,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c1d2e3f4-5g6h-7i8j-9k0l-1m2n3o4p5q6r",
+              "leftValue": "={{ $json.ready_for_publish }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equal"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "j2k1l0m9-4n5o-6p7q-8r9s-0t1u2v3w4x5y",
+      "name": "Quality Check",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1340,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "manual-blog-trigger",
+        "options": {}
+      },
+      "id": "k3l2m1n0-5o6p-7q8r-9s0t-1u2v3w4x5y6z",
+      "name": "Manual Trigger Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        500
+      ]
+    }
+  ],
+  "connections": {
+    "Weekly Content Planning": {
+      "main": [
+        [
+          {
+            "node": "Google Trends Research",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Trends Research": {
+      "main": [
+        [
+          {
+            "node": "Reddit Content Research",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reddit Content Research": {
+      "main": [
+        [
+          {
+            "node": "AI Content Writer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Content Writer": {
+      "main": [
+        [
+          {
+            "node": "SEO Optimizer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SEO Optimizer": {
+      "main": [
+        [
+          {
+            "node": "Quality Check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Quality Check": {
+      "main": [
+        [
+          {
+            "node": "Generate Featured Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Featured Image": {
+      "main": [
+        [
+          {
+            "node": "WordPress Publisher",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WordPress Publisher": {
+      "main": [
+        [
+          {
+            "node": "Twitter Share",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "LinkedIn Share",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Email Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Trigger Webhook": {
+      "main": [
+        [
+          {
+            "node": "Google Trends Research",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1.0.0",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "your-n8n-instance-id"
+  },
+  "id": "blog-research-writing-automation",
+  "tags": [
+    {
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z",
+      "id": "automation",
+      "name": "automation"
+    },
+    {
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z",
+      "id": "content-marketing",
+      "name": "content-marketing"
+    }
+  ]
+}
