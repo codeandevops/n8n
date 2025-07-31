@@ -1,0 +1,342 @@
+🧠 AI & Machine Learning (70+ AI nodes)
+Large Language Models
+
+OpenAI (GPT-3.5, GPT-4, DALL-E, Whisper)
+Anthropic (Claude models)
+Google AI (Gemini, Vertex AI, AI Studio)
+Cohere (Command, Embed models)
+Hugging Face (Transformers, Inference API)
+Azure OpenAI Service
+Mistral AI
+Ollama (Local LLM hosting)
+
+AI Platforms & Tools
+
+LangChain (Native integration with 70+ nodes)
+Vector Stores (Pinecone, Chroma, Weaviate, Qdrant)
+IBM Watson (Natural Language Understanding, Assistant)
+AWS AI Services (Comprehend, Rekognition, Textract)
+Microsoft Cognitive Services
+Stability AI (Stable Diffusion)
+
+
+💬 Communication & Messaging
+Team Communication
+
+Slack (Messages, channels, files, workflows)
+Microsoft Teams (Chat, meetings, files)
+Discord (Messages, webhooks, bots)
+Mattermost (Self-hosted team chat)
+Rocket.Chat (Open-source messaging)
+
+Email Services
+
+Gmail (Send, receive, organize emails)
+Microsoft Outlook (Email management)
+SendGrid (Email delivery service)
+Mailgun (Email automation)
+Amazon SES (Simple Email Service)
+Mailchimp (Email marketing)
+Constant Contact (Email campaigns)
+
+SMS & Voice
+
+Twilio (SMS, voice, video)
+Vonage (SMS, voice APIs)
+ClickSend (SMS, email, direct mail)
+MessageBird (Omnichannel messaging)
+
+Instant Messaging
+
+Telegram (Bots, messages, channels)
+WhatsApp Business API
+Signal (Secure messaging)
+Pushover (Push notifications)
+
+
+📊 Productivity & Office
+Google Workspace
+
+Google Sheets (Spreadsheet automation)
+Google Docs (Document creation/editing)
+Google Drive (File storage/sharing)
+Google Calendar (Event management)
+Gmail (Email automation)
+Google Forms (Form responses)
+
+Microsoft 365
+
+Excel Online (Spreadsheet operations)
+Word Online (Document processing)
+OneDrive (File storage)
+Outlook Calendar (Event scheduling)
+SharePoint (Collaboration platform)
+Power BI (Business intelligence)
+
+Note-Taking & Documentation
+
+Notion (All-in-one workspace)
+Evernote (Note organization)
+Obsidian (Knowledge management)
+Roam Research (Connected notes)
+Confluence (Team documentation)
+
+
+🎯 Project Management & Productivity
+Project Management Platforms
+
+Jira (Issue tracking, Agile workflows)
+Asana (Team project management)
+Trello (Kanban boards)
+Monday.com (Work management)
+ClickUp (All-in-one productivity)
+Linear (Issue tracking for developers)
+Height (Project management)
+Basecamp (Team collaboration)
+
+Task Management
+
+Todoist (Personal task management)
+Any.do (Task lists)
+Microsoft To Do (Task organization)
+Things 3 (GTD methodology)
+
+
+🛍️ E-commerce & Sales
+E-commerce Platforms
+
+Shopify (Online store management)
+WooCommerce (WordPress e-commerce)
+Magento (Enterprise e-commerce)
+BigCommerce (Cloud e-commerce)
+PrestaShop (Open-source e-commerce)
+Stripe (Payment processing)
+PayPal (Payment gateway)
+Square (Point of sale)
+
+CRM Systems
+
+Salesforce (Enterprise CRM)
+HubSpot (Marketing & sales)
+Pipedrive (Sales-focused CRM)
+Zoho CRM (Business automation)
+Freshsales (Sales CRM)
+ActiveCampaign (Customer experience)
+Close (Sales automation)
+
+
+📱 Social Media & Marketing
+Social Media Platforms
+
+Twitter/X (Posts, engagement, analytics)
+Facebook (Pages, posts, ads)
+Instagram (Content, stories, business)
+LinkedIn (Professional networking)
+YouTube (Video management, analytics)
+TikTok (Content automation)
+Pinterest (Pin management)
+Reddit (Community engagement)
+
+Marketing Automation
+
+Mailchimp (Email marketing)
+ConvertKit (Creator marketing)
+Constant Contact (Email campaigns)
+Mautic (Open-source marketing)
+Marketo (Enterprise marketing)
+Vero (Customer messaging)
+
+
+🗄️ Databases & Data Storage
+SQL Databases
+
+MySQL (Relational database)
+PostgreSQL (Advanced SQL database)
+Microsoft SQL Server (Enterprise database)
+SQLite (Lightweight database)
+MariaDB (MySQL alternative)
+
+NoSQL Databases
+
+MongoDB (Document database)
+Redis (Key-value store)
+CouchDB (Document-oriented)
+DynamoDB (AWS NoSQL)
+Firebase Firestore (Google NoSQL)
+
+Cloud Databases
+
+Airtable (No-code database)
+Baserow (Open-source Airtable alternative)
+NocoDB (Turns databases into spreadsheets)
+Supabase (Open-source Firebase alternative)
+
+
+☁️ Cloud Services & Infrastructure
+Amazon Web Services (AWS)
+
+S3 (Object storage)
+Lambda (Serverless functions)
+EC2 (Virtual machines)
+DynamoDB (NoSQL database)
+SQS (Message queuing)
+SNS (Notification service)
+Secrets Manager (Secret management)
+
+Google Cloud Platform
+
+Cloud Storage (Object storage)
+Cloud Functions (Serverless)
+BigQuery (Data warehouse)
+Pub/Sub (Messaging service)
+Cloud Run (Container platform)
+
+Microsoft Azure
+
+Blob Storage (Object storage)
+Functions (Serverless computing)
+Service Bus (Enterprise messaging)
+Key Vault (Secret management)
+Cognitive Services (AI APIs)
+
+
+🔗 Developer Tools & APIs
+Version Control
+
+GitHub (Git repositories, actions)
+GitLab (DevOps platform)
+Bitbucket (Git hosting)
+Git (Version control operations)
+
+API & Webhooks
+
+HTTP Request (Custom API calls)
+Webhooks (Real-time notifications)
+GraphQL (Query language)
+REST API (Web services)
+Postman (API testing)
+
+Development Platforms
+
+Vercel (Frontend deployment)
+Netlify (Static site hosting)
+Heroku (App hosting)
+Docker (Containerization)
+
+
+📋 Forms & Surveys
+Form Builders
+
+Typeform (Conversational forms)
+Google Forms (Simple forms)
+JotForm (Advanced forms)
+Formstack (Data collection)
+Wufoo (HTML forms)
+Gravity Forms (WordPress forms)
+
+
+🔐 Security & Authentication
+Secret Management
+
+HashiCorp Vault (Secret storage)
+AWS Secrets Manager (AWS secrets)
+Azure Key Vault (Azure secrets)
+Google Secret Manager (GCP secrets)
+Infisical (Open-source secrets)
+
+Authentication
+
+Auth0 (Identity platform)
+Okta (Enterprise identity)
+LDAP (Directory services)
+SAML (Single sign-on)
+
+
+📡 IoT & Messaging Protocols
+IoT Communication
+
+MQTT (IoT messaging protocol)
+RabbitMQ (Message broker)
+Apache Kafka (Event streaming)
+WebSocket (Real-time communication)
+
+
+🌐 Content & Media
+Content Management
+
+WordPress (CMS platform)
+Strapi (Headless CMS)
+Contentful (Content infrastructure)
+Ghost (Publishing platform)
+
+File Storage
+
+Dropbox (Cloud storage)
+OneDrive (Microsoft storage)
+Box (Enterprise file sharing)
+Nextcloud (Self-hosted cloud)
+
+
+📈 Analytics & Monitoring
+Web Analytics
+
+Google Analytics (Website analytics)
+Mixpanel (Product analytics)
+Amplitude (Digital optimization)
+Hotjar (User behavior)
+
+Monitoring & Logging
+
+New Relic (Application monitoring)
+Datadog (Infrastructure monitoring)
+Sentry (Error tracking)
+LogRocket (Session replay)
+
+
+💰 Finance & Payments
+Payment Processing
+
+Stripe (Online payments)
+PayPal (Payment gateway)
+Square (Point of sale)
+Braintree (Payment platform)
+
+Accounting
+
+QuickBooks (Small business accounting)
+Xero (Cloud accounting)
+FreshBooks (Invoice management)
+
+
+🎨 Design & Creative
+Design Tools
+
+Figma (Design collaboration)
+Sketch (UI design)
+Canva (Graphic design)
+Adobe Creative Cloud (Design suite)
+
+
+🏢 Enterprise & Specialized
+Enterprise Resource Planning
+
+SAP (Enterprise software)
+Oracle (Enterprise applications)
+NetSuite (Business management)
+
+Customer Support
+
+Zendesk (Customer service)
+Freshdesk (Help desk)
+Intercom (Customer messaging)
+Help Scout (Customer support)
+
+
+🔧 Custom & Advanced Options
+Custom Development
+
+HTTP Request Node (Any REST API)
+Code Node (JavaScript/Python)
+Function Node (Custom logic)
+Community Nodes (User-contributed)
+Custom Node Creation (Build your own)
